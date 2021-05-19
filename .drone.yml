@@ -17,9 +17,9 @@ steps:
   - docker build -t quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA} .
   environment:
     # DOCKER_HOST: tcp://172.17.0.1:2375
-  tags:
-    - ${DRONE_COMMIT_SHA}
-    - latest
+  # tags:
+  #   - ${DRONE_COMMIT_SHA}
+  #   - latest
   when:
     event:
     - pull_request
@@ -31,7 +31,7 @@ steps:
   commands:
   # wait for docker service to be up before running docker build
   - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
-  - docker login -u=$${DOCKER_USERNAME} -p=$${DOCKER_PASSWORD} quay.io
+  - docker login -u="ukhomeofficedigital+dsa_shared_service" -p=$${DOCKER_PASSWORD} quay.io
   - docker tag quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/dsa-kibana:latest
   - docker push quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA}
   - docker push quay.io/ukhomeofficedigital/dsa-kibana:latest

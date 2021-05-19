@@ -17,6 +17,9 @@ steps:
   - docker build -t quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA} .
   environment:
     # DOCKER_HOST: tcp://172.17.0.1:2375
+  tags:
+    - ${DRONE_COMMIT_SHA}
+    - latest
   when:
     event:
     - pull_request

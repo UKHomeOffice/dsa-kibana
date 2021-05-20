@@ -25,7 +25,7 @@ steps:
     event:
     - cron
     cron:
-    - nightly
+    - hourly
 
 - name: docker-push
   pull: if-not-exists
@@ -50,7 +50,7 @@ steps:
     event:
     - cron
     cron:
-    - nightly
+    - hourly
 
 
 services:

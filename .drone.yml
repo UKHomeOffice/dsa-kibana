@@ -21,11 +21,6 @@ steps:
     event:
     - pull_request
     - push
-  trigger:
-    event:
-    - cron
-    cron:
-    - hourly
 
 - name: docker-push
   pull: if-not-exists
@@ -46,11 +41,6 @@ steps:
     - master
     event:
     - push
-  trigger:
-    event:
-    - cron
-    cron:
-    - hourly
 
 
 services:
@@ -58,3 +48,9 @@ services:
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 
 ...
+
+when:
+  event:
+  - cron
+  cron:
+  - hourly

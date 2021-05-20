@@ -21,6 +21,11 @@ steps:
     event:
     - pull_request
     - push
+  trigger:
+    event:
+    - cron
+    cron:
+    - nightly
 
 - name: docker-push
   pull: if-not-exists
@@ -41,6 +46,12 @@ steps:
     - master
     event:
     - push
+  trigger:
+    event:
+    - cron
+    cron:
+    - nightly
+
 
 services:
 - name: docker

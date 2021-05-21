@@ -93,6 +93,5 @@ trigger:
   event:
   - cron
   cron:
-  - daily-updated-build
-  - hourly-updated-build
+  - daily-update-build
 ...

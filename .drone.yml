@@ -12,11 +12,8 @@ steps:
   pull: if-not-exists
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
   commands:
-  # wait for docker service to be up before running docker build
-  - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
+  - n=0; while [ "$n" -lt 60 ] && ! docker stats --no-stream; do n=$(( n + 1 )); sleep 1; done
   - docker build -t quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA} .
-  # environment:
-    # DOCKER_HOST: tcp://172.17.0.1:2375
   when:
     event:
     - pull_request
@@ -27,14 +24,12 @@ steps:
   pull: if-not-exists
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
   commands:
-  # wait for docker service to be up before running docker build
-  - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
+  - n=0; while [ "$n" -lt 60 ] && ! docker stats --no-stream; do n=$(( n + 1 )); sleep 1; done
   - docker login -u="ukhomeofficedigital+dsa_shared_service" -p=$${DOCKER_TOKEN} quay.io
   - docker tag quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/dsa-kibana:latest
   - docker push quay.io/ukhomeofficedigital/dsa-kibana:$${DRONE_COMMIT_SHA}
   - docker push quay.io/ukhomeofficedigital/dsa-kibana:latest
   environment:
-    # DOCKER_HOST: tcp://172.17.0.1:2375
     DOCKER_TOKEN:
       from_secret: DOCKER_TOKEN
   when:
@@ -62,7 +57,6 @@ steps:
 services:
 - name: docker
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-
 
 ---
 

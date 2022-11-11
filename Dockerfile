@@ -7,7 +7,7 @@ RUN chmod 755 /usr/local/bin/start_kibana.sh
 
 # update underlying OS
 USER root
-RUN apt-get update -y && apt-get upgrade && apt-get autoclean
+RUN apt-get update -y && apt-get upgrade -y && apt-get autoclean
 
 # run as the kibana user (1000:1000)
 USER 1000

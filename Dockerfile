@@ -1,4 +1,4 @@
-FROM docker.elastic.co/kibana/kibana:7.17.0
+FROM docker.elastic.co/kibana/kibana:8.4.3
 
 # add our custom script(s)
 COPY --chown=kibana:root [ "scripts/start_kibana.sh", "/usr/local/bin/" ]

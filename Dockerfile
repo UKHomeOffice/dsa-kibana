@@ -1,4 +1,4 @@
-FROM kibana:7.17.8
+FROM kibana:8.6.0
 
 # add our custom script(s)
 COPY --chown=kibana:root [ "scripts/start_kibana.sh", "/usr/local/bin/" ]
